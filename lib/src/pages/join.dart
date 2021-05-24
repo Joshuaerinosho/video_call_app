@@ -5,14 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import './call.dart';
+import 'call.dart';
 
-class IndexPage extends StatefulWidget {
+class JoinPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => IndexState();
 }
 
-class IndexState extends State<IndexPage> {
+class IndexState extends State<JoinPage> {
   /// create a channelController to retrieve text value
   final _channelController = TextEditingController();
 
@@ -32,9 +32,9 @@ class IndexState extends State<IndexPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[800],
-        title: Text('Join with ID'),
-        leading: Icon(CupertinoIcons.arrow_left),
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Text('Join a Meeting', style: TextStyle(color: Colors.grey[700],fontWeight:FontWeight.w400,letterSpacing: 1.0,)),
+        leading: InkWell(onTap:()=>Navigator.pop(context),child: Icon(CupertinoIcons.arrow_left, color: Colors.black,)),
         elevation: 0.0,
         actions: [
           Padding(
@@ -42,7 +42,7 @@ class IndexState extends State<IndexPage> {
             child: RaisedButton(
               onPressed: onJoin,
               child: Text('Join'),
-              color: Colors.grey[700],
+              color: Theme.of(context).buttonColor,//Colors.grey[700],
               textColor: Colors.white,
             ),
           ),

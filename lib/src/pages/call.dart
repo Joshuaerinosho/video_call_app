@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/settings.dart';
@@ -45,7 +46,7 @@ class _CallPageState extends State<CallPage> {
   }
 
   Future<void> initialize() async {
-    if (APP_ID1.isEmpty) {
+    if (APP_ID.isEmpty) {
       setState(() {
         _infoStrings.add(
           'APP_ID missing, please provide your APP_ID in settings.dart',
@@ -61,12 +62,12 @@ class _CallPageState extends State<CallPage> {
     VideoEncoderConfiguration configuration = VideoEncoderConfiguration();
     configuration.dimensions = VideoDimensions(1920, 1080);
     await _engine.setVideoEncoderConfiguration(configuration);
-    await _engine.joinChannel(Token1, widget.channelName, null, 0);
+    await _engine.joinChannel(Token, widget.channelName, null, 0);
   }
 
   /// Create agora sdk instance and initialize
   Future<void> _initAgoraRtcEngine() async {
-    _engine = await RtcEngine.create(APP_ID1);
+    _engine = await RtcEngine.create(APP_ID);
     await _engine.enableVideo();
     await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
     await _engine.setClientRole(widget.role);
@@ -185,12 +186,12 @@ class _CallPageState extends State<CallPage> {
             onPressed: _onToggleMute,
             child: Icon(
               muted ? Icons.mic_off : Icons.mic,
-              color: muted ? Colors.white : Colors.blueAccent,
+              color: muted ? Colors.white : Colors.grey[700],
               size: 20.0,
             ),
             shape: CircleBorder(),
             elevation: 2.0,
-            fillColor: muted ? Colors.blueAccent : Colors.white,
+            fillColor: muted ? Colors.grey[700] : Colors.white,
             padding: const EdgeInsets.all(12.0),
           ),
           RawMaterialButton(
@@ -207,9 +208,8 @@ class _CallPageState extends State<CallPage> {
           ),
           RawMaterialButton(
             onPressed: _onSwitchCamera,
-            child: Icon(
-              Icons.switch_camera,
-              color: Colors.blueAccent,
+            child: Icon( CupertinoIcons.camera_rotate,
+              color: Colors.grey[700],
               size: 20.0,
             ),
             shape: CircleBorder(),
@@ -223,54 +223,54 @@ class _CallPageState extends State<CallPage> {
   }
 
   /// Info panel to show logs
-  Widget _panel() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 48),
-      alignment: Alignment.bottomCenter,
-      child: FractionallySizedBox(
-        heightFactor: 0.5,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 48),
-          child: ListView.builder(
-            reverse: true,
-            itemCount: _infoStrings.length,
-            itemBuilder: (BuildContext context, int index) {
-              if (_infoStrings.isEmpty) {
-                return null;
-              }
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 3,
-                  horizontal: 10,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Flexible(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 2,
-                          horizontal: 5,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.yellowAccent,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Text(
-                          _infoStrings[index],
-                          style: TextStyle(color: Colors.blueGrey),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget _panel() {
+  //   return Container(
+  //     padding: const EdgeInsets.symmetric(vertical: 48),
+  //     alignment: Alignment.bottomCenter,
+  //     child: FractionallySizedBox(
+  //       heightFactor: 0.5,
+  //       child: Container(
+  //         padding: const EdgeInsets.symmetric(vertical: 48),
+  //         child: ListView.builder(
+  //           reverse: true,
+  //           itemCount: _infoStrings.length,
+  //           itemBuilder: (BuildContext context, int index) {
+  //             if (_infoStrings.isEmpty) {
+  //               return null;
+  //             }
+  //             return Padding(
+  //               padding: const EdgeInsets.symmetric(
+  //                 vertical: 3,
+  //                 horizontal: 10,
+  //               ),
+  //               child: Row(
+  //                 mainAxisSize: MainAxisSize.min,
+  //                 children: [
+  //                   Flexible(
+  //                     child: Container(
+  //                       padding: const EdgeInsets.symmetric(
+  //                         vertical: 2,
+  //                         horizontal: 5,
+  //                       ),
+  //                       decoration: BoxDecoration(
+  //                         color: Colors.yellowAccent,
+  //                         borderRadius: BorderRadius.circular(5),
+  //                       ),
+  //                       child: Text(
+  //                         _infoStrings[index],
+  //                         style: TextStyle(color: Colors.blueGrey),
+  //                       ),
+  //                     ),
+  //                   )
+  //                 ],
+  //               ),
+  //             );
+  //           },
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   void _onCallEnd(BuildContext context) {
     Navigator.pop(context);
@@ -290,17 +290,16 @@ class _CallPageState extends State<CallPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Video RTC Test'),
-      // ),
       backgroundColor: Colors.black,
-      body: Center(
-        child: Stack(
-          children: <Widget>[
-            _viewRows(),
-            _panel(),
-            _toolbar(),
-          ],
+      body: SafeArea(
+              child: Center(
+          child: Stack(
+            children: <Widget>[
+              _viewRows(),
+              //_panel(),
+              _toolbar(),
+            ],
+          ),
         ),
       ),
     );
