@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:video_call/src/pages/join.dart';
 
-
 // This implements the animation on the homepage
 class Anime extends StatelessWidget {
   const Anime({
-    Key key,
-    @required this.size,
+    Key? key,
+    required this.size,
   }) : super(key: key);
 
   final Size size;
@@ -25,12 +24,11 @@ class Anime extends StatelessWidget {
   }
 }
 
-
 //implements the join meeting button
 class JoinMeetingButton extends StatelessWidget {
   const JoinMeetingButton({
-    Key key,
-    @required this.isDark,
+    Key? key,
+    required this.isDark,
   }) : super(key: key);
 
   final bool isDark;
@@ -55,9 +53,7 @@ class JoinMeetingButton extends StatelessWidget {
                     ])
               : BoxDecoration(color: Colors.white, boxShadow: [
                   BoxShadow(
-                      color: Colors.grey[300],
-                      blurRadius: 5.0,
-                      spreadRadius: 5.0)
+                      color: Colors.grey, blurRadius: 5.0, spreadRadius: 5.0)
                 ]),
           child: Center(
             child: Text('Join with Meet ID',
@@ -73,8 +69,8 @@ class JoinMeetingButton extends StatelessWidget {
 //implements the new meeting button
 class NewMeetButton extends StatelessWidget {
   const NewMeetButton({
-    Key key,
-    @required this.isDark,
+    Key? key,
+    required this.isDark,
   }) : super(key: key);
 
   final bool isDark;
@@ -112,34 +108,36 @@ class NewMeetButton extends StatelessWidget {
                     Row(
                       children: [
                         Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                          FlatButton(
-                              onPressed: () {}, child: Row(
-                                children: [
-                                  Icon(Icons.link),
-                                  SizedBox(width: 10),
-                                  Text('Get a meeting link to share'),
-                                ],
-                              )),
-                          FlatButton(
-                              onPressed: () {}, child: Row(
-                                children: [
-                                   Icon(Icons.video_call),
-                                  SizedBox(width: 10),
-                                  Text('start instant meeting'),
-                                ],
-                              )),
-                          FlatButton(
-                              onPressed: ()=>Navigator.pop(context),
-                               child: Row(
-                                children: [
-                                   Icon(Icons.cancel),
-                                  SizedBox(width: 10),
-                                  Text('cancel'),
-                                ],
-                              )),
-                        ])
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              FlatButton(
+                                  onPressed: () {},
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.link),
+                                      SizedBox(width: 10),
+                                      Text('Get a meeting link to share'),
+                                    ],
+                                  )),
+                              FlatButton(
+                                  onPressed: () {},
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.video_call),
+                                      SizedBox(width: 10),
+                                      Text('start instant meeting'),
+                                    ],
+                                  )),
+                              FlatButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.cancel),
+                                      SizedBox(width: 10),
+                                      Text('cancel'),
+                                    ],
+                                  )),
+                            ])
                       ],
                     )
                   ],
@@ -164,9 +162,7 @@ class NewMeetButton extends StatelessWidget {
                       ])
                 : BoxDecoration(color: Colors.grey[300], boxShadow: [
                     BoxShadow(
-                        color: Colors.grey[400],
-                        blurRadius: 5.0,
-                        spreadRadius: 3.0)
+                        color: Colors.grey, blurRadius: 5.0, spreadRadius: 3.0)
                   ]),
             child: Center(
                 child: Text('New Meeting',

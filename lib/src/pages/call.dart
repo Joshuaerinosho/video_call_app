@@ -16,7 +16,8 @@ class CallPage extends StatefulWidget {
   final ClientRole role;
 
   /// Creates a call page with given channel name.
-  const CallPage({Key key, this.channelName, this.role}) : super(key: key);
+  const CallPage({Key? key, required this.channelName, required this.role})
+      : super(key: key);
 
   @override
   _CallPageState createState() => _CallPageState();
@@ -26,7 +27,7 @@ class _CallPageState extends State<CallPage> {
   final _users = <int>[];
   final _infoStrings = <String>[];
   bool muted = false;
-  RtcEngine _engine;
+  late RtcEngine _engine;
 
   @override
   void dispose() {
@@ -208,7 +209,8 @@ class _CallPageState extends State<CallPage> {
           ),
           RawMaterialButton(
             onPressed: _onSwitchCamera,
-            child: Icon( CupertinoIcons.camera_rotate,
+            child: Icon(
+              CupertinoIcons.camera_rotate,
               color: Colors.grey[700],
               size: 20.0,
             ),
@@ -221,56 +223,6 @@ class _CallPageState extends State<CallPage> {
       ),
     );
   }
-
-  /// Info panel to show logs
-  // Widget _panel() {
-  //   return Container(
-  //     padding: const EdgeInsets.symmetric(vertical: 48),
-  //     alignment: Alignment.bottomCenter,
-  //     child: FractionallySizedBox(
-  //       heightFactor: 0.5,
-  //       child: Container(
-  //         padding: const EdgeInsets.symmetric(vertical: 48),
-  //         child: ListView.builder(
-  //           reverse: true,
-  //           itemCount: _infoStrings.length,
-  //           itemBuilder: (BuildContext context, int index) {
-  //             if (_infoStrings.isEmpty) {
-  //               return null;
-  //             }
-  //             return Padding(
-  //               padding: const EdgeInsets.symmetric(
-  //                 vertical: 3,
-  //                 horizontal: 10,
-  //               ),
-  //               child: Row(
-  //                 mainAxisSize: MainAxisSize.min,
-  //                 children: [
-  //                   Flexible(
-  //                     child: Container(
-  //                       padding: const EdgeInsets.symmetric(
-  //                         vertical: 2,
-  //                         horizontal: 5,
-  //                       ),
-  //                       decoration: BoxDecoration(
-  //                         color: Colors.yellowAccent,
-  //                         borderRadius: BorderRadius.circular(5),
-  //                       ),
-  //                       child: Text(
-  //                         _infoStrings[index],
-  //                         style: TextStyle(color: Colors.blueGrey),
-  //                       ),
-  //                     ),
-  //                   )
-  //                 ],
-  //               ),
-  //             );
-  //           },
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
   void _onCallEnd(BuildContext context) {
     Navigator.pop(context);
@@ -292,7 +244,7 @@ class _CallPageState extends State<CallPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
-              child: Center(
+        child: Center(
           child: Stack(
             children: <Widget>[
               _viewRows(),
