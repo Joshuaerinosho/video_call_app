@@ -7,7 +7,6 @@ import 'src/pages/join.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -28,15 +27,15 @@ class _MyAppState extends State<MyApp> {
           Size size = MediaQuery.of(context).size;
           return Scaffold(
             backgroundColor: isDark ? Colors.white24 : Colors.grey[200],
-
-            // implements the app bar
             appBar: AppBar(
               backgroundColor: isDark ? Colors.grey[900] : Colors.white,
               leading: Builder(
                   builder: (context) => GestureDetector(
                       onTap: () => Scaffold.of(context).openDrawer(),
                       child: Icon(Icons.menu,
-                          color: isDark ? Colors.grey[400] : Colors.black))),
+                          color: isDark ? Colors.grey[400] : Colors.black),
+                  ),
+              ),
               title: Text(
                 'Meet',
                 style: TextStyle(
@@ -63,20 +62,22 @@ class _MyAppState extends State<MyApp> {
                           trackColor: Colors.grey[400],
                           onChanged: (state) => setState(() {
                                 isDark = !isDark;
-                              })),
+                              },
+                                                        ),
+                      ),
                     ),
                     isDark
                         ? Text('Switch to light mode',
                             style: TextStyle(
                                 color: Colors.grey[600], fontSize: 14))
                         : Text('Switch to dark mode',
-                            style: TextStyle(color: Colors.black, fontSize: 14))
+                            style: TextStyle(color: Colors.black, fontSize: 14),
+                              )
                   ],
                 ),
               ),
             ),
 
-            //implements the body of the hompage
             body: Column(children: [
               Padding(
                 padding:
@@ -89,9 +90,10 @@ class _MyAppState extends State<MyApp> {
                     ]),
               ),
               SizedBox(height: size.width * 0.2),
-              Anime(size: size) //the meeting animation on the homepage
+              Anime(size: size)
             ]),
           );
-        }));
+        }),
+    );
   }
 }
