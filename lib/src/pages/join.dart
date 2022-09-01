@@ -42,7 +42,7 @@ class IndexState extends State<JoinPage> {
             child: RaisedButton(
               onPressed: onJoin,
               child: Text('Join'),
-              color: Theme.of(context).buttonColor,//Colors.grey[700],
+              color: Theme.of(context).buttonColor,
               textColor: Colors.white,
             ),
           ),
@@ -63,7 +63,6 @@ class IndexState extends State<JoinPage> {
                       errorText:
                           _validateError ? 'Recipients ID is mandatory' : null,
                       border: UnderlineInputBorder(
-                       // borderRadius: //BorderRadius.circular(20)
                         borderSide: BorderSide(width: 1),
                        ),
                       hintText: 'Meeting ID',
