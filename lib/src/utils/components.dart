@@ -81,7 +81,7 @@ class NewMeetButton extends StatelessWidget {
     return InkWell(
         onTap: () => showModalBottomSheet(
             context: context,
-            backgroundColor: Theme.of(context).cardColor, //Colors.grey[200],
+            backgroundColor: Theme.of(context).cardColor, 
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
             ),
@@ -136,14 +136,17 @@ class NewMeetButton extends StatelessWidget {
                                       SizedBox(width: 10),
                                       Text('cancel'),
                                     ],
-                                  )),
-                            ])
+                                  ),
+                              ),
+                            ],
+                        )
                       ],
                     )
                   ],
                 ),
               );
             }),
+      
         focusColor: Colors.grey[700],
         hoverColor: Colors.grey[700],
         splashColor: Colors.grey[700],
@@ -169,12 +172,15 @@ class NewMeetButton extends StatelessWidget {
                     style: TextStyle(
                       color: isDark ? Colors.grey[400] : Colors.black,
                       letterSpacing: 1.0,
-                    )))));
+                    ),
+                ),
+            ),
+        ),
+    );
   }
 }
 
-//implements new meeting dialog
-
+///implements new meeting dialog
 class NewMeeting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
